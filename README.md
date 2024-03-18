@@ -6,3 +6,6 @@ should be able to clone this project and in google extensions developer portal (
 its very minimal right now, kinda looks like this
 
 <img width="398" alt="image" src="https://github.com/zrogerye/PomodoroTimerExtension/assets/67408272/d5bdbe02-5259-4a32-8aca-da58a11392de">
+
+
+This project was created by XXXXX
