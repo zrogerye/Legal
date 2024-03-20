@@ -5,7 +5,7 @@
     "description": "A simple Pomodoro timer extension.",
     "action": {
       "default_popup": "popup.html",
-      "default_icon":"hello_extensions.png"
+      "default_icon":"items/hello_extensions.png"
     },
     "permissions": ["alarms", "storage", "notifications"],
     "background": {
