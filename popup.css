@@ -48,4 +48,11 @@ body {
     margin: 5px; /* Space out buttons */
     font-size: 16px; /* Increase font size for better visibility */
   }
+
+  #settings-btn {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+  
   

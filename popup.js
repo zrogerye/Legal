@@ -50,3 +50,8 @@ function updateDisplay(isRunning, timeLeft) {
 window.onunload = function() {
   if (updateInterval) clearInterval(updateInterval);
 };
+
+document.getElementById('settings-btn').addEventListener('click', () => {
+  window.location.href = "settings.html";
+});
+
