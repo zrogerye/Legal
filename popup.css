@@ -1,51 +1,45 @@
 body {
-    width: 400px; /* Adjust width as needed */
-    height: 200px; /* Adjust height as needed */
-    margin: 0;
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Timer display styles */
-  #timer-display {
-    font-size: 48px; /* Increased font size */
-    margin: 20px 0; /* Add margin for spacing */
-    text-align: center;
-    width: 100%; /* Ensure it spans the full width */
-    order: 1; /* Ensure it's at the top */
-  }
-  
-  /* Styles for the number inputs */
-  input[type="number"] {
-    width: 60px; /* Adjust as needed */
-    padding: 5px;
-    margin: 0 5px;
-    text-align: center;
-  }
-  
-  /* Container for the input fields and set timer button */
-  #time-input-container {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    order: 3; /* Positioning below the timer display */
-  }
-  
-  /* Container for the buttons to ensure they're in the same row */
-  #buttons-container {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    order: 2; /* Positioning below the timer display and above input container */
-  }
-  
-  button {
-    padding: 10px 20px; /* Adjust padding for better visual */
-    margin: 5px; /* Space out buttons */
-    font-size: 16px; /* Increase font size for better visibility */
-  }
-  
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  background: url('images/grid_background.png'); /* Placeholder for your grid background */
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: brown;
+  padding: 5px;
+}
+
+#settings-btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 24px; /* Adjust the size as needed */
+}
+
+#timer-display {
+  font-size: 2em;
+  margin-top: 20px;
+}
+
+#chart-container {
+  margin: 20px auto;
+  width: 200px; /* This is just a placeholder, adjust as needed */
+  height: 200px;
+  background-color: green; /* Placeholder for the dynamic pie chart */
+  border-radius: 50%;
+}
+
+#timer-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}

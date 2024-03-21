@@ -1,15 +1,19 @@
 {
-    "manifest_version": 3,
-    "name": "Pomodoro Timer",
-    "version": "1.0",
-    "description": "A simple Pomodoro timer extension.",
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon":"images/hello_extensions.png"
-    },
-    "permissions": ["alarms", "storage", "notifications"],
-    "background": {
-      "service_worker": "background.js"
-    }
+  "manifest_version": 3,
+  "name": "Study Gamer Pomodoro Timer",
+  "version": "1.0",
+  "description": "A Pomodoro timer with a customizable timer setting and visual pie chart.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/default_icon.png"
+  },
+  "icons": {
+    "16": "images/default_icon.png",
+    "48": "images/default_icon.png",
+    "128": "images/default_icon.png"
+  },
+  "permissions": ["alarms", "storage", "notifications"],
+  "background": {
+    "service_worker": "background.js"
   }
-  
+}
