@@ -4,12 +4,15 @@
   <link rel="stylesheet" type="text/css" href="settings.css">
 </head>
 <body>
-  <!-- Back button at the top left -->
   <button id="back-btn">Back</button>
   
-  <!-- Settings content -->
-  ...
-  
+  <div id="time-input-container">
+    Hours: <input type="number" id="hours" min="0" value="0">
+    Minutes: <input type="number" id="minutes" min="0" value="25">
+    Seconds: <input type="number" id="seconds" min="0" value="0">
+    <button id="set-timer-btn">Set Timer</button>
+  </div>
+
   <script src="settings.js"></script>
 </body>
 </html>

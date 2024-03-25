@@ -5,16 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (updateInterval) clearInterval(updateInterval);
   updateInterval = setInterval(checkTimerStatus, 1000);
 
-  document.getElementById('set-timer-btn').addEventListener('click', () => {
-    const hours = parseInt(document.getElementById('hours').value) || 0;
-    const minutes = parseInt(document.getElementById('minutes').value) || 0;
-    const seconds = parseInt(document.getElementById('seconds').value) || 0;
-    const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-    chrome.runtime.sendMessage({command: "setTime", time: totalSeconds}, () => {
-      checkTimerStatus();
-    });
-  });
-
   document.getElementById('start-stop-btn').addEventListener('click', () => {
     chrome.runtime.sendMessage({command: "getStatus"}, response => {
       if (response.isRunning) {
@@ -30,6 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
       checkTimerStatus();
     });
   });
+});
+
+document.getElementById('settings-btn').addEventListener('click', () => {
+  window.location.href = "settings.html";
 });
 
 function checkTimerStatus() {
@@ -50,8 +44,3 @@ function updateDisplay(isRunning, timeLeft) {
 window.onunload = function() {
   if (updateInterval) clearInterval(updateInterval);
 };
-
-document.getElementById('settings-btn').addEventListener('click', () => {
-  window.location.href = "settings.html";
-});
-

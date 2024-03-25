@@ -13,8 +13,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       stopTimer();
       break;
     case "reset":
-      stopTimer(); // Ensure timer is stopped before resetting.
-      timeLeft = 25 * 60; // Optionally reset to a default value.
+      //stopTimer(); // Ensure timer is stopped before resetting.
+      //timeLeft = 25 * 60; // Optionally reset to a default value.
+      chrome.storage.local.get(["customTime"],function(result){
+        stopTimer();
+        timeLeft=result.customTime || 25*60;
+        sendResponse({isRunning, timeLeft});
+      });
       break;
     case "setTime":
       if (!isRunning) { // Only allow time set if the timer isn't running.
