@@ -20,10 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
       checkTimerStatus();
     });
   });
+
+  document.getElementById('settings-btn').addEventListener('click', () => {
+    window.location.href = "settings.html";
+  });
 });
 
-document.getElementById('settings-btn').addEventListener('click', () => {
-  window.location.href = "settings.html";
+// Listen for an updateDisplay command to update the timer display
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.command === "updateDisplay") {
+    updateDisplay(request.isRunning, request.timeLeft);
+  }
 });
 
 function checkTimerStatus() {

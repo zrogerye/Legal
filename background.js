@@ -36,6 +36,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
       }
       break;
+    case "updateDisplay":
+      sendResponse({ isRunning, timeLeft: request.timeLeft });
+      break;
     case "getStatus":
       sendResponse({ isRunning, timeLeft });
       return true; // async response, return immediately
@@ -47,23 +50,28 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 function startTimer() {
   isRunning = true;
   timer = setInterval(() => {
-    timeLeft--;
+    if (timeLeft > 0) {
+      timeLeft--;
+    }
     if (timeLeft <= 0) {
       clearInterval(timer);
       isRunning = false;
-      timeLeft = defaultTime; // Reset to default or you might want to load from storage
+      // Update the time display to 0 when the timer finishes.
+      chrome.runtime.sendMessage({command: "updateDisplay", timeLeft: 0});
       // Optionally, send a notification to the user that the timer has finished.
       chrome.notifications.create({
         type: "basic",
-        iconUrl: "images/timer48.png",
+        iconUrl: "images/timer48.jpg",
         title: "Time's up!",
         message: "Your timer has finished.",
         priority: 2,
       });
-      updateTimeLeft(); // Update timeLeft from storage or set to default
+      // Here we reset timeLeft to the default or custom time
+      updateTimeLeft(); 
     }
   }, 1000);
 }
+
 
 function stopTimer() {
   clearInterval(timer);
