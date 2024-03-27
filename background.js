@@ -58,19 +58,25 @@ function startTimer() {
       isRunning = false;
       // Update the time display to 0 when the timer finishes.
       chrome.runtime.sendMessage({command: "updateDisplay", timeLeft: 0});
-      // Optionally, send a notification to the user that the timer has finished.
+
+      // send a notification to the user that the timer has finished.
       chrome.notifications.create({
         type: "basic",
-        iconUrl: "images/timer48.jpg",
+        iconUrl: "images/timer48.jpg", // Ensure this is the correct path to your icon
         title: "Time's up!",
         message: "Your timer has finished.",
-        priority: 2,
+        priority: 2
+      }, function(notificationId) {
+          // Open and focus a new tab after the notification.
+          chrome.tabs.create({url: 'https://www.example.com', active: true});
       });
+
       // Here we reset timeLeft to the default or custom time
       updateTimeLeft(); 
     }
   }, 1000);
 }
+
 
 
 function stopTimer() {
