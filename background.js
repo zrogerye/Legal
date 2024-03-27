@@ -24,6 +24,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     case "setTime":
       if (!isRunning) { // Only allow time set if the timer isn't running.
         timeLeft = parseInt(request.time);
+        chrome.storage.local.set({customTime: timeLeft},function(){
+          console.log("Time set to: "+timeLeft);
+        });
       }
       break;
     case "getStatus":
