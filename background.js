@@ -68,7 +68,7 @@ function startTimer() {
         priority: 2
       }, function(notificationId) {
           // Open and focus a new tab after the notification.
-          chrome.tabs.create({url: 'https://www.example.com', active: true});
+          chrome.tabs.create({url: 'https://www.google.com', active: true});
       });
 
       // Here we reset timeLeft to the default or custom time
