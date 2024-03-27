@@ -1,6 +1,15 @@
 let isRunning = false;
 let timer;
-let timeLeft = 25 * 60; // Default to 25 minutes, but this will be overridden by user input.
+let defaultTime = 25 * 60; // Default to 25 minutes
+let timeLeft = defaultTime; // Initialize timeLeft with the default time.
+
+// Helper function to update timeLeft from storage or default
+function updateTimeLeft(callback) {
+  chrome.storage.local.get(["customTime"], function(result) {
+    timeLeft = result.customTime || defaultTime;
+    if (callback) callback();
+  });
+}
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.command) {
@@ -13,27 +22,26 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       stopTimer();
       break;
     case "reset":
-      //stopTimer(); // Ensure timer is stopped before resetting.
-      //timeLeft = 25 * 60; // Optionally reset to a default value.
-      chrome.storage.local.get(["customTime"],function(result){
+      updateTimeLeft(() => {
         stopTimer();
-        timeLeft=result.customTime || 25*60;
-        sendResponse({isRunning, timeLeft});
+        sendResponse({ isRunning, timeLeft });
       });
-      break;
+      return true; // indicates we will send a response asynchronously
     case "setTime":
       if (!isRunning) { // Only allow time set if the timer isn't running.
-        timeLeft = parseInt(request.time);
-        chrome.storage.local.set({customTime: timeLeft},function(){
-          console.log("Time set to: "+timeLeft);
+        let newTime = parseInt(request.time);
+        timeLeft = newTime;
+        chrome.storage.local.set({ customTime: newTime }, function() {
+          console.log('Custom time saved: ' + newTime);
         });
       }
       break;
     case "getStatus":
-      sendResponse({isRunning, timeLeft});
-      return; // async response, return immediately
+      sendResponse({ isRunning, timeLeft });
+      return true; // async response, return immediately
   }
-  sendResponse({isRunning, timeLeft});
+  sendResponse({ isRunning, timeLeft });
+  return false; // if synchronous
 });
 
 function startTimer() {
@@ -43,7 +51,7 @@ function startTimer() {
     if (timeLeft <= 0) {
       clearInterval(timer);
       isRunning = false;
-      timeLeft = 0; // Reset to 0 to avoid negative values.
+      timeLeft = defaultTime; // Reset to default or you might want to load from storage
       // Optionally, send a notification to the user that the timer has finished.
       chrome.notifications.create({
         type: "basic",
@@ -52,6 +60,7 @@ function startTimer() {
         message: "Your timer has finished.",
         priority: 2,
       });
+      updateTimeLeft(); // Update timeLeft from storage or set to default
     }
   }, 1000);
 }
@@ -60,4 +69,3 @@ function stopTimer() {
   clearInterval(timer);
   isRunning = false;
 }
-
