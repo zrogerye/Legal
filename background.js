@@ -95,3 +95,21 @@ function toggleSiteBlocking(shouldBlock) {
     chrome.declarativeNetRequest.updateDynamicRules({removeRuleIds: [1]});
   }
 }
+
+chrome.runtime.onStartup.addListener(() => {
+  // Load the settings when the browser starts
+  loadSettings();
+});
+
+function loadSettings() {
+  chrome.storage.local.get(['customTime', 'blockedSites'], function(data) {
+    if (data.customTime) {
+      timeLeft = data.customTime;
+    }
+    if (data.blockedSites) {
+      blockedSites = data.blockedSites;
+      updateBlockedSites();
+    }
+  });
+}
+
