@@ -4,7 +4,6 @@ let defaultTime = 25 * 60; // Default to 25 minutes
 let timeLeft = defaultTime; // Initialize timeLeft with the default time.
 let blockedSites = [];
 
-// Helper function to update timeLeft from storage or default
 function updateTimeLeft(callback) {
   chrome.storage.local.get(["customTime"], function(result) {
     timeLeft = result.customTime || defaultTime;
@@ -32,9 +31,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       if (!isRunning) {
         let newTime = parseInt(request.time);
         timeLeft = newTime;
-        chrome.storage.local.set({ customTime: newTime }, function() {
-          console.log('Custom time saved: ' + newTime);
-        });
+        chrome.storage.local.set({ customTime: newTime });
       }
       break;
     case "updateDisplay":
@@ -44,7 +41,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ isRunning, timeLeft });
       return true; // async response, return immediately
     case "blockSite":
-      toggleSiteBlocking(request.block);
+      updateBlockedSites(request.block, request.site);
       break;
   }
   sendResponse({ isRunning, timeLeft });
@@ -67,10 +64,8 @@ function startTimer() {
         title: "Time's up!",
         message: "Your timer has finished.",
         priority: 2
-      }, function(notificationId) {
-        chrome.tabs.create({url: 'https://www.example.com', active: true});
       });
-      updateTimeLeft(); 
+      updateTimeLeft(); // This will set timeLeft to the custom time or default time
     }
   }, 1000);
 }
@@ -80,24 +75,37 @@ function stopTimer() {
   isRunning = false;
 }
 
-// Function to toggle site blocking
-function toggleSiteBlocking(shouldBlock) {
-  let rule = {
-    id: 1,
-    priority: 1,
-    action: { type: 'block' },
-    condition: { urlFilter: '*://*.instagram.com/*', resourceTypes: ['main_frame'] }
-  };
+// Updates the dynamic rules for blocking sites based on the current state of blockedSites
+function updateBlockingRules() {
+    chrome.declarativeNetRequest.getDynamicRules((rules) => {
+        const existingIds = rules.map(rule => rule.id);
+        const newRules = blockedSites.map((site, index) => {
+            return {
+                id: existingIds.length + index + 1, // Start IDs after the existing ones
+                priority: 1,
+                action: { type: 'block' },
+                condition: { urlFilter: `*://*.${site}/*`, resourceTypes: ['main_frame'] }
+            };
+        });
 
-  if (shouldBlock) {
-    chrome.declarativeNetRequest.updateDynamicRules({addRules: [rule], removeRuleIds: [1]});
-  } else {
-    chrome.declarativeNetRequest.updateDynamicRules({removeRuleIds: [1]});
+        // Remove all rules before adding new ones to prevent ID conflicts
+        chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: existingIds }, () => {
+            chrome.declarativeNetRequest.updateDynamicRules({ addRules: newRules });
+        });
+    });
+}
+
+function updateBlockedSites(block, site) {
+  const index = blockedSites.indexOf(site);
+  if (block && index === -1) {
+    blockedSites.push(site);
+  } else if (!block && index !== -1) {
+    blockedSites.splice(index, 1);
   }
+  updateBlockingRules();
 }
 
 chrome.runtime.onStartup.addListener(() => {
-  // Load the settings when the browser starts
   loadSettings();
 });
 
@@ -108,8 +116,7 @@ function loadSettings() {
     }
     if (data.blockedSites) {
       blockedSites = data.blockedSites;
-      updateBlockedSites();
+      updateBlockingRules();
     }
   });
 }
-
