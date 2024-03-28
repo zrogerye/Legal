@@ -4,9 +4,8 @@
   <link rel="stylesheet" type="text/css" href="settings.css">
 </head>
 <body>
-  <!-- Back button at the top left -->
   <button id="back-btn">Back</button>
-  
+
   <div id="time-input-container">
     <div>
       Minutes: <input type="number" id="minutes" min="0" max="59" value="25"><br>
@@ -15,6 +14,20 @@
       Seconds: <input type="number" id="seconds" min="0" max="59" value="0"><br>
     </div>
     <button id="set-timer-btn">Set Timer</button>
+  </div>
+
+  <div id="site-blocker-container">
+    <label for="block-instagram">Block Instagram:</label>
+    <input type="checkbox" id="block-instagram" class="site-block-toggle" data-site="instagram.com"><br>
+
+    <label for="block-snapchat">Block Snapchat:</label>
+    <input type="checkbox" id="block-snapchat" class="site-block-toggle" data-site="snapchat.com"><br>
+
+    <label for="block-tiktok">Block TikTok:</label>
+    <input type="checkbox" id="block-tiktok" class="site-block-toggle" data-site="tiktok.com"><br>
+
+    <label for="block-youtube">Block YouTube:</label>
+    <input type="checkbox" id="block-youtube" class="site-block-toggle" data-site="youtube.com"><br>
   </div>
 
   <script src="settings.js"></script>

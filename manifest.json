@@ -1,15 +1,26 @@
 {
-    "manifest_version": 3,
-    "name": "Pomodoro Timer",
-    "version": "1.0",
-    "description": "A simple Pomodoro timer extension.",
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon":"images/hello_extensions.png"
-    },
-    "permissions": ["alarms", "storage", "notifications"],
-    "background": {
-      "service_worker": "background.js"
-    }
+  "manifest_version": 3,
+  "name": "Pomodoro Timer",
+  "version": "1.0",
+  "description": "A simple Pomodoro timer extension with a website blocking feature.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/hello_extensions.png"
+  },
+  "permissions": [
+    "alarms",
+    "storage",
+    "notifications",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
+  ],
+  "host_permissions": [
+    "*://*.instagram.com/*",
+    "*://*.tiktok.com/*",
+    "*://*.snapchat.com/*",
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
   }
-  
+}

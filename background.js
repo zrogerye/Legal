@@ -2,6 +2,7 @@ let isRunning = false;
 let timer;
 let defaultTime = 25 * 60; // Default to 25 minutes
 let timeLeft = defaultTime; // Initialize timeLeft with the default time.
+let blockedSites = [];
 
 // Helper function to update timeLeft from storage or default
 function updateTimeLeft(callback) {
@@ -28,7 +29,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       });
       return true; // indicates we will send a response asynchronously
     case "setTime":
-      if (!isRunning) { // Only allow time set if the timer isn't running.
+      if (!isRunning) {
         let newTime = parseInt(request.time);
         timeLeft = newTime;
         chrome.storage.local.set({ customTime: newTime }, function() {
@@ -42,6 +43,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     case "getStatus":
       sendResponse({ isRunning, timeLeft });
       return true; // async response, return immediately
+    case "blockSite":
+      toggleSiteBlocking(request.block);
+      break;
   }
   sendResponse({ isRunning, timeLeft });
   return false; // if synchronous
@@ -56,30 +60,38 @@ function startTimer() {
     if (timeLeft <= 0) {
       clearInterval(timer);
       isRunning = false;
-      // Update the time display to 0 when the timer finishes.
       chrome.runtime.sendMessage({command: "updateDisplay", timeLeft: 0});
-
-      // send a notification to the user that the timer has finished.
       chrome.notifications.create({
         type: "basic",
-        iconUrl: "images/timer48.jpg", // Ensure this is the correct path to your icon
+        iconUrl: "images/timer48.png",
         title: "Time's up!",
         message: "Your timer has finished.",
         priority: 2
       }, function(notificationId) {
-          // Open and focus a new tab after the notification.
-          chrome.tabs.create({url: 'https://www.google.com', active: true});
+        chrome.tabs.create({url: 'https://www.example.com', active: true});
       });
-
-      // Here we reset timeLeft to the default or custom time
       updateTimeLeft(); 
     }
   }, 1000);
 }
 
-
-
 function stopTimer() {
   clearInterval(timer);
   isRunning = false;
+}
+
+// Function to toggle site blocking
+function toggleSiteBlocking(shouldBlock) {
+  let rule = {
+    id: 1,
+    priority: 1,
+    action: { type: 'block' },
+    condition: { urlFilter: '*://*.instagram.com/*', resourceTypes: ['main_frame'] }
+  };
+
+  if (shouldBlock) {
+    chrome.declarativeNetRequest.updateDynamicRules({addRules: [rule], removeRuleIds: [1]});
+  } else {
+    chrome.declarativeNetRequest.updateDynamicRules({removeRuleIds: [1]});
+  }
 }
