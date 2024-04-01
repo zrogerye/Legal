@@ -64,8 +64,13 @@ function startTimer() {
         title: "Time's up!",
         message: "Your timer has finished.",
         priority: 2
+      }, function(notificationId) {
+        // Open and focus a new tab after the notification.
+        chrome.tabs.create({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
       });
-      updateTimeLeft(); // This will set timeLeft to the custom time or default time
+
+      // Here we reset timeLeft to the default or custom time
+      updateTimeLeft(); 
     }
   }, 1000);
 }
