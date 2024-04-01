@@ -1,6 +1,6 @@
 body {
-    width: 400px; /* Adjust width as needed */
-    height: 200px; /* Adjust height as needed */
+    width: 277px; /* Adjust width as needed */
+    height: 402px; /* Adjust height as needed */
     margin: 0;
     padding: 10px;
     box-sizing: border-box;
@@ -8,6 +8,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('images/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    text-align: center;
   }
   
   /* Timer display styles */
@@ -43,16 +48,33 @@ body {
     order: 2; /* Positioning below the timer display and above input container */
   }
   
-  button {
-    padding: 10px 20px; /* Adjust padding for better visual */
-    margin: 5px; /* Space out buttons */
-    font-size: 16px; /* Increase font size for better visibility */
-  }
+  /* button {
+    padding: 10px 20px;
+    margin: 5px; 
+    font-size: 16px; 
+  } */
 
   #settings-btn {
-    position: absolute;
     top: 5px;
     left: 5px;
   }
-  
-  
+
+  .top-bar{
+    list-style: none;
+    background-color: #5E4746;
+    overflow: auto;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 2px;
+    top: 0;
+    position: fixed;
+  }
+
+  .top-bar li{
+    float: left;
+  }
+
+  .top-bar li a{
+    text-decoration: none;
+    color: #EBC49F;
+  }

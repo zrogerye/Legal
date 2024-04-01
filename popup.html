@@ -3,13 +3,22 @@
 <head>
   <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
+
+
 <body>
-  <button id="settings-btn">Settings</button>
-  <div id="timer-display">0:25:00</div>
-  <div id="buttons-container">
-    <button id="start-stop-btn">Start</button>
-    <button id="reset-btn">Reset</button>
-  </div>
+  <ul class="top-bar">
+    <li><a href="#settings.html" id="settings-btn"><img src="images/setting_icon.png" alt="settings icon"></a></li>
+    <li><a href="#study" id="logo"></a>Study Timer</li>
+  </ul>
+
+  <main>
+    <div id="timer-display">0:25:00</div>
+    <div id="buttons-container">
+      <button id="start-stop-btn">Start</button>
+      <button id="reset-btn">Reset</button>
+    </div>
+  </main>
+
   <script src="popup.js"></script>
 </body>
 </html>
