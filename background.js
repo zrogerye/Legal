@@ -65,8 +65,10 @@ function startTimer() {
         message: "Your timer has finished.",
         priority: 2
       }, function(notificationId) {
-        // Open and focus a new tab after the notification.
+        // Open and focus a new tabs after the notification.
         chrome.tabs.create({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
+        //removing tab
+        // chrome.tabs.remove({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
       });
 
       // Here we reset timeLeft to the default or custom time
