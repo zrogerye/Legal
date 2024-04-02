@@ -20,32 +20,30 @@ document.addEventListener("DOMContentLoaded", () => {
       checkTimerStatus();
     });
   });
-
-  document.getElementById('settings-btn').addEventListener('click', () => {
-    window.location.href = "settings.html";
-  });
 });
 
-// Listen for an updateDisplay command to update the timer display
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.command === "updateDisplay") {
-    updateDisplay(request.isRunning, request.timeLeft);
-  }
+document.getElementById('settings-btn').addEventListener('click', () => {
+  window.location.href = "settings.html";
 });
 
 function checkTimerStatus() {
   chrome.runtime.sendMessage({command: "getStatus"}, response => {
-    updateDisplay(response.isRunning, response.timeLeft);
+    updateDisplay(response.isRunning, response.timeLeft, response.totalTime);
   });
 }
 
-function updateDisplay(isRunning, timeLeft) {
+function updateDisplay(isRunning, timeLeft, totalTime) {
   const hours = Math.floor(timeLeft / 3600);
   const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;
   document.getElementById('timer-display').textContent =
     `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   document.getElementById('start-stop-btn').textContent = isRunning ? 'Stop' : 'Start';
+  // Calculate and set the custom properties for the pie chart animation
+
+  document.documentElement.style.setProperty('--time-left', timeLeft);
+  document.documentElement.style.setProperty('--total-time', totalTime);
+
 }
 
 window.onunload = function() {

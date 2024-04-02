@@ -78,3 +78,45 @@ body {
     text-decoration: none;
     color: #EBC49F;
   }
+
+
+/* pie chart code */
+
+
+
+@property --percentage {
+  initial-value: 100%;
+  inherits: false;
+  syntax: "<percentage>";
+  
+}
+
+.chart {
+  background: conic-gradient(rgba(176, 197, 164, 1) var(--percentage), white 0);
+  border-radius: 50%;
+  width: 60vmin;
+  height: 60vmin;
+  animation: timer 4s infinite linear;
+  box-shadow: 0 0 0 1px black; /* Add a thin black outline */
+}
+
+
+@keyframes timer {
+  from {
+    --percentage: calc(var(--time-left) / var(--total-time) * 100%);
+  }
+  to {
+    --percentage: 0%;
+  }
+}
+
+
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  padding: 2rem;
+}
