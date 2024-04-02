@@ -51,3 +51,17 @@ function updateDisplay(isRunning, timeLeft) {
 window.onunload = function() {
   if (updateInterval) clearInterval(updateInterval);
 };
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.command === "updateDisplay") {
+    updateDisplay(request.isRunning, request.timeLeft);
+  } else if (request.command === "updateMode") {
+    updateDisplay(request.isRunning, request.timeLeft);
+    updateModeDisplay(request.mode);
+  }
+});
+
+function updateModeDisplay(mode) {
+  const modeLabel = document.getElementById('mode-label'); // Add this element in your HTML
+  modeLabel.textContent = mode.charAt(0).toUpperCase() + mode.slice(1) + " Timer"; // "Study Timer" or "Break Timer"
+}

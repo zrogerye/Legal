@@ -3,6 +3,9 @@ let timer;
 let defaultTime = 25 * 60; // Default to 25 minutes
 let timeLeft = defaultTime; // Initialize timeLeft with the default time.
 let blockedSites = [];
+let mode = "study";
+let studyTime = defaultTime;
+let breakTime = studyTime * 0.2;
 
 function updateTimeLeft(callback) {
   chrome.storage.local.get(["customTime"], function(result) {
@@ -43,12 +46,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     case "blockSite":
       updateBlockedSites(request.block, request.site);
       break;
+      case "setTime":
+        if (!isRunning) {
+          let newTime = parseInt(request.time);
+          studyTime = newTime; // Update study time
+          breakTime = studyTime * 0.2; // Update break time to 20% of study time
+          timeLeft = mode === "study" ? studyTime : breakTime; // Update timeLeft based on mode
+          chrome.storage.local.set({ customTime: newTime, mode: mode });
+        }
+        break;
   }
   sendResponse({ isRunning, timeLeft });
   return false; // if synchronous
 });
 
 function startTimer() {
+  // Adjust the timer setup based on the mode
   isRunning = true;
   timer = setInterval(() => {
     if (timeLeft > 0) {
@@ -57,22 +70,20 @@ function startTimer() {
     if (timeLeft <= 0) {
       clearInterval(timer);
       isRunning = false;
-      chrome.runtime.sendMessage({command: "updateDisplay", timeLeft: 0});
-      chrome.notifications.create({
-        type: "basic",
-        iconUrl: "images/timer48.png",
-        title: "Time's up!",
-        message: "Your timer has finished.",
-        priority: 2
-      }, function(notificationId) {
-        // Open and focus a new tabs after the notification.
-        chrome.tabs.create({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
-        //removing tab
-        // chrome.tabs.remove({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
-      });
-
-      // Here we reset timeLeft to the default or custom time
-      updateTimeLeft(); 
+      if (mode === "study") {
+        // Open a new tab when the study timer finishes
+        chrome.tabs.create({ url: 'https://www.example.com', active: true });
+        // Start the break timer immediately
+        mode = "break";
+        timeLeft = breakTime;
+        startTimer();
+      } else {
+        mode = "study"; // Reset to study mode after the break
+        timeLeft = studyTime; // Reset timeLeft to the study duration
+      }
+      // Send a message to update the popup with the new mode and time
+      chrome.runtime.sendMessage({ command: "updateMode", mode: mode, timeLeft: timeLeft });
+      updateTimeLeft(); // This will set timeLeft to the custom time or default time
     }
   }, 1000);
 }
