@@ -48,15 +48,20 @@ body {
     order: 2; /* Positioning below the timer display and above input container */
   }
   
-  /* button {
+  button {
     padding: 10px 20px;
     margin: 5px; 
     font-size: 16px; 
-  } */
+    border-radius: 200px;
+    background-color: #EBC49F;
+  } 
 
   #settings-btn {
     top: 5px;
     left: 5px;
+    float: left;
+    padding: 5px;
+    padding-left: 12px;
   }
 
   .top-bar{
@@ -68,18 +73,29 @@ body {
     border-radius: 2px;
     top: 0;
     position: fixed;
-  }
-
-  .top-bar li{
-    float: left;
+    overflow-y: hidden;
+    width: 277px;
+    height: 40.7px;
   }
 
   .top-bar li a{
     text-decoration: none;
     color: #EBC49F;
+    
   }
-
-
+  .londrina-solid-regular {
+    font-family: "Londrina Solid", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  #timer-logo{
+    font-size: 25px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    letter-spacing: 2px;
+    /* need to make this centered */
+    }
 /* pie chart code */
 
 
