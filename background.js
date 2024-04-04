@@ -3,9 +3,6 @@ let timer;
 let defaultTime = 25 * 60; // Default to 25 minutes
 let timeLeft = defaultTime; // Initialize timeLeft with the default time.
 let blockedSites = [];
-let mode = "study";
-let studyTime = defaultTime;
-let breakTime = studyTime * 0.2;
 
 function updateTimeLeft(callback) {
   chrome.storage.local.get(["customTime"], function(result) {
@@ -29,14 +26,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         stopTimer();
         sendResponse({ isRunning, timeLeft });
       });
-      return true; // indicates we will send a response asynchronously
     case "setTime":
       if (!isRunning) {
-        studyTime = parseInt(request.time);
-        breakTime = studyTime * 0.2; // Update the break time
-        timeLeft = studyTime; // Set the timer to the new study time
-        chrome.storage.local.set({ customTime: studyTime, breakTime: breakTime });
-        sendResponse({ timeLeft: timeLeft, mode: mode });
+        let newTime = parseInt(request.time);
+        timeLeft = newTime;
+        chrome.storage.local.set({ customTime: newTime });
       }
       break;
     case "updateDisplay":
@@ -58,22 +52,26 @@ function startTimer() {
   timer = setInterval(() => {
     if (timeLeft > 0) {
       timeLeft--;
-    } else {
+    }
+    if (timeLeft <= 0) {
       clearInterval(timer);
       isRunning = false;
-      chrome.runtime.sendMessage({ command: "updateDisplay", timeLeft: 0, mode: mode });
+      chrome.runtime.sendMessage({command: "updateDisplay", timeLeft: 0});
+      chrome.notifications.create({
+        type: "basic",
+        iconUrl: "images/timer48.png",
+        title: "Time's up!",
+        message: "Your timer has finished.",
+        priority: 2
+      }, function(notificationId) {
+        // Open and focus a new tabs after the notification.
+        chrome.tabs.create({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
+        //removing tab
+        // chrome.tabs.remove({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
+      });
 
-      if (mode === "study") {
-        mode = "break";
-        timeLeft = studyTime * 0.2; // Set break time to 20% of study time
-        chrome.tabs.create({ url: 'https://www.example.com', active: true }); // Replace with your desired URL
-        startTimer(); // Start the break timer immediately
-      } else {
-        mode = "study";
-        timeLeft = studyTime; // Reset to original study time
-        // Optionally, update the display or notify the user that the break is over
-        chrome.runtime.sendMessage({ command: "updateMode", mode: mode });
-      }
+      // Here we reset timeLeft to the default or custom time
+      updateTimeLeft(); 
     }
   }, 1000);
 }
