@@ -22,6 +22,7 @@ body {
     text-align: center;
     width: 100%; /* Ensure it spans the full width */
     order: 1; /* Ensure it's at the top */
+    color: #D37676;
   }
   
   /* Styles for the number inputs */
@@ -43,9 +44,11 @@ body {
   /* Container for the buttons to ensure they're in the same row */
   #buttons-container {
     display: flex;
+    text-decoration: none;
     justify-content: space-evenly;
     width: 100%;
     order: 2; /* Positioning below the timer display and above input container */
+    font-size: 16px;
   }
   
   button {
@@ -83,10 +86,13 @@ body {
     color: #EBC49F;
     
   }
+
   .londrina-solid-regular {
     font-family: "Londrina Solid", sans-serif;
     font-weight: 400;
     font-style: normal;
+    color: white;
+    text-decoration: none;
   }
   
   #timer-logo{
@@ -96,43 +102,39 @@ body {
     letter-spacing: 2px;
     /* need to make this centered */
     }
-/* pie chart code */
 
 
-
-@property --percentage {
-  initial-value: 100%;
-  inherits: false;
-  syntax: "<percentage>";
-  
-}
-
-.chart {
-  background: conic-gradient(rgba(176, 197, 164, 1) var(--percentage), white 0);
-  border-radius: 50%;
-  width: 60vmin;
-  height: 60vmin;
-  animation: timer 4s infinite linear;
-  box-shadow: 0 0 0 1px black; /* Add a thin black outline */
-}
-
-
-@keyframes timer {
-  from {
-    --percentage: calc(var(--time-left) / var(--total-time) * 100%);
+  /* pie chart code */
+  @property --percentage {
+    initial-value: 100%;
+    inherits: false;
+    syntax: "<percentage>";
+    
   }
-  to {
-    --percentage: 0%;
+
+  .chart {
+    background: conic-gradient(rgba(176, 197, 164, 1) var(--percentage), white 0);
+    border-radius: 50%;
+    width: 60vmin;
+    height: 60vmin;
+    animation: timer 4s infinite linear;
+    box-shadow: 0 0 0 1px black; /* Add a thin black outline */
   }
-}
 
+  @keyframes timer {
+    from {
+      --percentage: calc(var(--time-left) / var(--total-time) * 100%);
+    }
+    to {
+      --percentage: 0%;
+    }
+  }
 
-
-body {
-  height: 100vh;
-  margin: 0;
-  display: grid;
-  place-items: center;
-  box-sizing: border-box;
-  padding: 2rem;
-}
+  body {
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    padding: 2rem;
+  }
