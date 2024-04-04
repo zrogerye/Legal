@@ -49,6 +49,7 @@ body {
     width: 100%;
     order: 2; /* Positioning below the timer display and above input container */
     font-size: 16px;
+    padding-bottom: 20px;
   }
   
   button {
@@ -65,6 +66,10 @@ body {
     float: left;
     padding: 5px;
     padding-left: 12px;
+
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto; */
   }
 
   .top-bar{
@@ -79,6 +84,11 @@ body {
     overflow-y: hidden;
     width: 277px;
     height: 40.7px;
+
+    /* need to change */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
   }
 
   .top-bar li a{
@@ -93,6 +103,7 @@ body {
     font-style: normal;
     color: white;
     text-decoration: none;
+    text-align: center;
   }
   
   #timer-logo{
