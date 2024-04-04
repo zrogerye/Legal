@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
       checkTimerStatus();
     });
   });
-});
 
-document.getElementById('settings-btn').addEventListener('click', () => {
-  window.location.href = "settings.html";
+  document.getElementById('settings-btn').addEventListener('click', () => {
+    window.location.href = "settings.html";
+  });
 });
 
 function checkTimerStatus() {
@@ -39,11 +39,9 @@ function updateDisplay(isRunning, timeLeft, totalTime) {
   document.getElementById('timer-display').textContent =
     `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   document.getElementById('start-stop-btn').textContent = isRunning ? 'Stop' : 'Start';
-  // Calculate and set the custom properties for the pie chart animation
 
   document.documentElement.style.setProperty('--time-left', timeLeft);
   document.documentElement.style.setProperty('--total-time', totalTime);
-
 }
 
 window.onunload = function() {
@@ -60,6 +58,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 function updateModeDisplay(mode) {
-  const modeLabel = document.getElementById('mode-label'); // Add this element in your HTML
-  modeLabel.textContent = mode.charAt(0).toUpperCase() + mode.slice(1) + " Timer"; // "Study Timer" or "Break Timer"
+  const modeLabel = document.getElementById('mode-label');
+  if (modeLabel !== null) { // Check if the element exists before trying to update it
+    modeLabel.textContent = mode.charAt(0).toUpperCase() + mode.slice(1) + " Timer";
+  }
 }

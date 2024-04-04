@@ -32,9 +32,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       return true; // indicates we will send a response asynchronously
     case "setTime":
       if (!isRunning) {
-        let newTime = parseInt(request.time);
-        timeLeft = newTime;
-        chrome.storage.local.set({ customTime: newTime });
+        studyTime = parseInt(request.time);
+        breakTime = studyTime * 0.2; // Update the break time
+        timeLeft = studyTime; // Set the timer to the new study time
+        chrome.storage.local.set({ customTime: studyTime, breakTime: breakTime });
+        sendResponse({ timeLeft: timeLeft, mode: mode });
       }
       break;
     case "updateDisplay":
@@ -46,44 +48,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     case "blockSite":
       updateBlockedSites(request.block, request.site);
       break;
-      case "setTime":
-        if (!isRunning) {
-          let newTime = parseInt(request.time);
-          studyTime = newTime; // Update study time
-          breakTime = studyTime * 0.2; // Update break time to 20% of study time
-          timeLeft = mode === "study" ? studyTime : breakTime; // Update timeLeft based on mode
-          chrome.storage.local.set({ customTime: newTime, mode: mode });
-        }
-        break;
   }
   sendResponse({ isRunning, timeLeft });
   return false; // if synchronous
 });
 
 function startTimer() {
-  // Adjust the timer setup based on the mode
   isRunning = true;
   timer = setInterval(() => {
     if (timeLeft > 0) {
       timeLeft--;
-    }
-    if (timeLeft <= 0) {
+    } else {
       clearInterval(timer);
       isRunning = false;
+      chrome.runtime.sendMessage({ command: "updateDisplay", timeLeft: 0, mode: mode });
+
       if (mode === "study") {
-        // Open a new tab when the study timer finishes
-        chrome.tabs.create({ url: 'https://www.example.com', active: true });
-        // Start the break timer immediately
         mode = "break";
-        timeLeft = breakTime;
-        startTimer();
+        timeLeft = studyTime * 0.2; // Set break time to 20% of study time
+        chrome.tabs.create({ url: 'https://www.example.com', active: true }); // Replace with your desired URL
+        startTimer(); // Start the break timer immediately
       } else {
-        mode = "study"; // Reset to study mode after the break
-        timeLeft = studyTime; // Reset timeLeft to the study duration
+        mode = "study";
+        timeLeft = studyTime; // Reset to original study time
+        // Optionally, update the display or notify the user that the break is over
+        chrome.runtime.sendMessage({ command: "updateMode", mode: mode });
       }
-      // Send a message to update the popup with the new mode and time
-      chrome.runtime.sendMessage({ command: "updateMode", mode: mode, timeLeft: timeLeft });
-      updateTimeLeft(); // This will set timeLeft to the custom time or default time
     }
   }, 1000);
 }
