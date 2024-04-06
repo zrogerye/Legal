@@ -38,7 +38,10 @@ function updateDisplay(isRunning, timeLeft, totalTime) {
   const seconds = timeLeft % 60;
   document.getElementById('timer-display').textContent =
     `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  document.getElementById('start-stop-btn').textContent = isRunning ? 'STOP' : 'START';
+  var property = document.getElementById('start-stop-btn');
+  property.textContent = isRunning ? 'STOP' : 'START';
+  property.style.backgroundColor = isRunning ?  "#EBC49F": "#D37676";
+  document.getElementById('reset-btn').style.backgroundColor = isRunning ?  "#EBC49F": "#D37676";;
   // Calculate and set the custom properties for the pie chart animation
 
   document.documentElement.style.setProperty('--time-left', timeLeft);
