@@ -38,7 +38,7 @@ function updateDisplay(isRunning, timeLeft, totalTime) {
   const seconds = timeLeft % 60;
   document.getElementById('timer-display').textContent =
     `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  document.getElementById('start-stop-btn').textContent = isRunning ? 'Stop' : 'Start';
+  document.getElementById('start-stop-btn').textContent = isRunning ? 'STOP' : 'START';
 
   document.documentElement.style.setProperty('--time-left', timeLeft);
   document.documentElement.style.setProperty('--total-time', totalTime);

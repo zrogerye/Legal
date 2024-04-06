@@ -22,6 +22,7 @@ body {
     text-align: center;
     width: 100%; /* Ensure it spans the full width */
     order: 1; /* Ensure it's at the top */
+    color: #D37676;
   }
   
   /* Styles for the number inputs */
@@ -43,9 +44,12 @@ body {
   /* Container for the buttons to ensure they're in the same row */
   #buttons-container {
     display: flex;
+    text-decoration: none;
     justify-content: space-evenly;
     width: 100%;
     order: 2; /* Positioning below the timer display and above input container */
+    font-size: 16px;
+    padding-bottom: 20px;
   }
   
   button {
@@ -62,6 +66,10 @@ body {
     float: left;
     padding: 5px;
     padding-left: 12px;
+
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto; */
   }
 
   .top-bar{
@@ -76,6 +84,11 @@ body {
     overflow-y: hidden;
     width: 277px;
     height: 40.7px;
+
+    /* need to change */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
   }
 
   .top-bar li a{
@@ -83,10 +96,14 @@ body {
     color: #EBC49F;
     
   }
+
   .londrina-solid-regular {
     font-family: "Londrina Solid", sans-serif;
     font-weight: 400;
     font-style: normal;
+    color: white;
+    text-decoration: none;
+    text-align: center;
   }
   
   #timer-logo{
