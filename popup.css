@@ -66,10 +66,6 @@ body {
     float: left;
     padding: 5px;
     padding-left: 12px;
-
-    /* display: block;
-    margin-left: auto;
-    margin-right: auto; */
   }
 
   .top-bar{
@@ -84,11 +80,6 @@ body {
     overflow-y: hidden;
     width: 277px;
     height: 40.7px;
-
-    /* need to change */
-    display: flex; 
-    justify-content: center;
-    align-items: center;
   }
 
   .top-bar li a{
@@ -111,9 +102,17 @@ body {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
     letter-spacing: 2px;
-    /* need to make this centered */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    padding-right: 30px;
+    padding-top: 4px;
+    align-self: center;
     }
 
+  main{
+    padding-left: 30px;
+  }
 
   /* pie chart code */
   @property --percentage {
