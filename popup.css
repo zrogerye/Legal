@@ -1,122 +1,120 @@
 body {
-    width: 277px; /* Adjust width as needed */
-    height: 402px; /* Adjust height as needed */
-    margin: 0;
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/background.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    text-align: center;
-  }
-  
-  /* Timer display styles */
-  #timer-display {
-    font-size: 48px; /* Increased font size */
-    margin: 20px 0; /* Add margin for spacing */
-    text-align: center;
-    width: 100%; /* Ensure it spans the full width */
-    order: 1; /* Ensure it's at the top */
-    color: #D37676;
-  }
-  
-  /* Styles for the number inputs */
-  input[type="number"] {
-    width: 60px; /* Adjust as needed */
-    padding: 5px;
-    margin: 0 5px;
-    text-align: center;
-  }
-  
-  /* Container for the input fields and set timer button */
-  #time-input-container {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    order: 3; /* Positioning below the timer display */
-  }
-  
-  /* Container for the buttons to ensure they're in the same row */
-  #buttons-container {
-    display: flex;
-    text-decoration: none;
-    justify-content: space-evenly;
-    width: 100%;
-    order: 2; /* Positioning below the timer display and above input container */
-    font-size: 16px;
-    padding-bottom: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin: 5px; 
-    font-size: 16px; 
-    border-radius: 200px;
-    background-color: #EBC49F;
-  } 
+  width: 277px; /* Adjust width as needed */
+  height: 402px; /* Adjust height as needed */
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('images/background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+}
 
-  #settings-btn {
-    top: 5px;
-    left: 5px;
-    float: left;
-    padding: 5px;
-    padding-left: 12px;
+/* Timer display styles */
+#timer-display {
+  font-size: 48px; /* Increased font size */
+  margin: 20px 0; /* Add margin for spacing */
+  text-align: center;
+  width: 100%; /* Ensure it spans the full width */
+  order: 1; /* Ensure it's at the top */
+  color: #D37676;
+}
 
-    /* display: block;
-    margin-left: auto;
-    margin-right: auto; */
-  }
+/* Styles for the number inputs */
+input[type="number"] {
+  width: 60px; /* Adjust as needed */
+  padding: 5px;
+  margin: 0 5px;
+  text-align: center;
+}
 
-  .top-bar{
-    list-style: none;
-    background-color: #5E4746;
-    overflow: auto;
-    margin: 0px;
-    padding: 0px;
-    border-radius: 2px;
-    top: 0;
-    position: fixed;
-    overflow-y: hidden;
-    width: 277px;
-    height: 40.7px;
+/* Container for the input fields and set timer button */
+#time-input-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  order: 3; /* Positioning below the timer display */
+}
 
-    /* need to change */
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-  }
+/* Container for the buttons to ensure they're in the same row */
+#buttons-container {
+  display: flex;
+  text-decoration: none;
+  justify-content: space-evenly;
+  width: 100%;
+  order: 2; /* Positioning below the timer display and above input container */
+  font-size: 16px;
+  padding-bottom: 20px;
+}
 
-  .top-bar li a{
-    text-decoration: none;
-    color: #EBC49F;
-    
-  }
+button {
+  padding: 10px 20px;
+  margin: 5px; 
+  font-size: 16px; 
+  border-radius: 200px;
+  background-color: #EBC49F;
+} 
 
-  .londrina-solid-regular {
-    font-family: "Londrina Solid", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-  }
+#settings-btn {
+  top: 5px;
+  left: 5px;
+  float: left;
+  padding: 5px;
+  padding-left: 12px;
+}
+
+.top-bar{
+  list-style: none;
+  background-color: #5E4746;
+  overflow: auto;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 2px;
+  top: 0;
+  position: fixed;
+  overflow-y: hidden;
+  width: 277px;
+  height: 40.7px;
+}
+
+.top-bar li a{
+  text-decoration: none;
+  color: #EBC49F;
   
-  #timer-logo{
-    font-size: 25px;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-    letter-spacing: 2px;
-    /* need to make this centered */
-    }
+}
+
+.londrina-solid-regular {
+  font-family: "Londrina Solid", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+#timer-logo{
+  font-size: 25px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  letter-spacing: 2px;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  padding-right: 30px;
+  padding-top: 4px;
+  align-self: center;
+  }
+
+main{
+  padding-left: 30px;
+}
+
 /* pie chart code */
-
-
-
 @property --percentage {
   initial-value: 100%;
   inherits: false;
@@ -133,7 +131,6 @@ body {
   box-shadow: 0 0 0 1px black; /* Add a thin black outline */
 }
 
-
 @keyframes timer {
   from {
     --percentage: calc(var(--time-left) / var(--total-time) * 100%);
@@ -142,8 +139,6 @@ body {
     --percentage: 0%;
   }
 }
-
-
 
 body {
   height: 100vh;
