@@ -114,7 +114,7 @@ main{
   padding-left: 30px;
 }
 
-/* pie chart code */
+/*pie chart code */
 @property --percentage {
   initial-value: 100%;
   inherits: false;
