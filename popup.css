@@ -127,13 +127,13 @@ main{
   border-radius: 50%;
   width: 60vmin;
   height: 60vmin;
-  animation: timer 4s infinite linear;
+  animation: timer 10s infinite linear;
   box-shadow: 0 0 0 1px black; /* Add a thin black outline */
 }
 
 @keyframes timer {
   from {
-    --percentage: calc(var(--time-left) / var(--total-time) * 100%);
+    --percentage: 100%;
   }
   to {
     --percentage: 0%;
