@@ -16,8 +16,8 @@
     <button id="set-timer-btn">Set Timer</button>
   </div>
 
-  <div id="site-blocker-container">
-    <label for="block-instagram">Block Instagram:</label>
+
+  <label for="block-instagram">Block Instagram:</label>
     <input type="checkbox" id="block-instagram" class="site-block-toggle" data-site="instagram.com"><br>
 
     <label for="block-snapchat">Block Snapchat:</label>
@@ -28,6 +28,12 @@
 
     <label for="block-youtube">Block YouTube:</label>
     <input type="checkbox" id="block-youtube" class="site-block-toggle" data-site="youtube.com"><br>
+  </div>
+
+  <div>
+    <!-- New input for custom site URL -->
+    <input type="text" id="customSite" placeholder="Enter a site to block" />
+    <button id="blockSiteBtn">Block Site</button>
   </div>
 
   <script src="settings.js"></script>

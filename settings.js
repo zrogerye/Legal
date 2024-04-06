@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = "popup.html";
     });
   });
-
+  
   const siteToggles = document.getElementsByClassName('site-block-toggle');
 
   for (let toggle of siteToggles) {
@@ -57,4 +57,25 @@ function loadSettings() {
 
 document.getElementById('back-btn').addEventListener('click', () => {
   window.location.href = "popup.html"; // Navigate back to the popup
+});
+
+document.getElementById('blockSiteBtn').addEventListener('click', () => {
+  const customSite = document.getElementById('customSite').value;
+  if (customSite) {
+    // Add protocol if missing
+    let formattedSite = customSite.includes('://') ? customSite : `https://${customSite}`;
+    chrome.storage.local.get({ blockedSites: [] }, function(data) {
+      if (!data.blockedSites.includes(formattedSite)) {
+        const updatedBlockedSites = data.blockedSites.concat([formattedSite]);
+        chrome.storage.local.set({ blockedSites: updatedBlockedSites });
+        chrome.runtime.sendMessage({
+          command: "blockSite",
+          block: true,
+          site: formattedSite
+        });
+        // Clear the input after adding the site
+        document.getElementById('customSite').value = '';
+      }
+    });
+  }
 });
