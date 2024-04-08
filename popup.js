@@ -1,3 +1,10 @@
+//throttle response
+var audio = new Audio('https://download.samplelib.com/mp3/sample-9s.mp3');
+audio.loop = true;
+audio.volume = 0.1;
+audio.play();
+
+
 let updateInterval;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -42,9 +49,6 @@ function updateDisplay(isRunning, timeLeft, totalTime) {
   property.textContent = isRunning ? 'STOP' : 'START';
   property.style.backgroundColor = isRunning ?  "#EBC49F": "#D37676";
   document.getElementById('reset-btn').style.backgroundColor = isRunning ?  "#EBC49F": "#D37676";;
-
-  document.documentElement.style.setProperty('--time-left', timeLeft);
-  document.documentElement.style.setProperty('--total-time', totalTime);
 }
 
 window.onunload = function() {
