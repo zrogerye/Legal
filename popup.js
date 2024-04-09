@@ -1,10 +1,3 @@
-//throttle response
-var audio = new Audio('https://download.samplelib.com/mp3/sample-9s.mp3');
-audio.loop = true;
-audio.volume = 0.1;
-audio.play();
-
-
 let updateInterval;
 
 document.addEventListener("DOMContentLoaded", () => {
