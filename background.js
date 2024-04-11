@@ -3,8 +3,10 @@ let timer;
 let defaultTime = 25 * 60; // Default to 25 minutes
 let timeLeft = defaultTime; // Initialize timeLeft with the default time.
 let blockedSites = [];
+let pingInterval;
 
 function updateTimeLeft(callback) {
+  startRandomPing();
   chrome.storage.local.get(["customTime"], function(result) {
     timeLeft = result.customTime || defaultTime;
     if (callback) callback();
@@ -15,7 +17,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.command) {
     case "start":
       if (!isRunning) {
+        //chrome.alarms.create("myAlarm", { delayInMinutes: 1 });
         startTimer();
+        startRandomPing();
       }
       break;
     case "stop":
@@ -35,6 +39,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       break;
     case "updateDisplay":
       sendResponse({ isRunning, timeLeft: request.timeLeft });
+      startRandomPing();
       break;
     case "getStatus":
       sendResponse({ isRunning, timeLeft });
@@ -48,6 +53,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 function startTimer() {
+  chrome.alarms.create("myAlarm", { delayInMinutes: 0.1, periodInMinutes: 0.1 });
   isRunning = true;
   timer = setInterval(() => {
     if (timeLeft > 0) {
@@ -126,3 +132,41 @@ function loadSettings() {
     }
   });
 }
+
+
+//keep alive
+function startRandomPing() {
+  if (pingInterval) return; // Avoid creating multiple intervals if one is already set
+  
+  pingInterval = setInterval(() => {
+      // Directly ping at intervals of 1 to 3 seconds without the additional setTimeout
+      // fetch('https://zrogerye.github.io/PomodoroTimerExtensionSite/', {
+      //     method: 'HEAD', // Use HEAD to minimize data transfer
+      // })
+      // .then(response => console.log(`Ping successful: ${response.status}`))
+      // .catch(error => console.error(`Ping failed: ${error}`));
+      console.log('website');
+  }, Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000); // Random delay between 1 to 3 seconds
+}
+
+function stopRandomPing() {
+  clearInterval(pingInterval);
+  pingInterval = null;
+}
+
+//alive v2
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === "myAlarm") {
+    // Do something when the alarm is triggered
+    // chrome.notifications.create({
+    //   type: "basic",
+    //   iconUrl: "images/timer48.jpg",
+    //   title: "Time's up!",
+    //   message: String(timeLeft) + " seconds left",
+    //   priority: 2
+    // });
+    console.log("Alarm triggered!");
+
+    console.log("Alarm triggered!");
+  }
+});
