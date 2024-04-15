@@ -62,7 +62,7 @@ function startTimer() {
       chrome.runtime.sendMessage({command: "updateDisplay", timeLeft: 0});
       chrome.notifications.create({
         type: "basic",
-        iconUrl: "images/timer48.png",
+        iconUrl: "images/timer48.jpg",
         title: "Time's up!",
         message: "Your timer has finished.",
         priority: 2

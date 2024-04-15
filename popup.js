@@ -37,7 +37,7 @@ function updateDisplay(isRunning, timeLeft, totalTime) {
   const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;
   document.getElementById('timer-display').textContent =
-    `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   var property = document.getElementById('start-stop-btn');
   property.textContent = isRunning ? 'STOP' : 'START';
   property.style.backgroundColor = isRunning ?  "#EBC49F": "#D37676";
