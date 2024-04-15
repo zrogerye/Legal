@@ -1,7 +1,20 @@
 body{
    background-image: url('images/blocked_background.png');
-   overflow: hidden;
+   overflow:hidden;
+}
 
+button{
+    display: block;
+    font-size: 35px;
+    margin: 40px;
+    border-radius: 20px;
+    padding-inline: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    letter-spacing: 3px;
+    color: white;
 }
 
 img{
@@ -21,7 +34,16 @@ img{
     align-items: center;
     color: #403433;
     font-size: 65px;
-    margin: 70px 0px 250px 0px;
+}
+
+#yes-btn{
+    background-color: #EBC49F;
+    margin-left: 850px;
+}
+
+#no-btn{
+    background-color: #D37676;
+    margin-left: 710px;
 }
 
 
