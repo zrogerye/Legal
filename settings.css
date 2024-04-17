@@ -49,10 +49,9 @@ body {
 }
 
 .contents {
-    margin-bottom: 0px; 
     align-items: center;
     position: absolute;
-    margin-left: 30px;
+    margin: 30px 0px 0px 30px;
 }
 
 .break-timer-color{
