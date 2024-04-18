@@ -136,3 +136,5 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     console.log("Alarm triggered!");
   }
 });
+
+export { updateBlockedSites };
