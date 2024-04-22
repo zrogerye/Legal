@@ -136,3 +136,12 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     console.log("Alarm triggered!");
   }
 });
+
+
+//redirection
+chrome.webNavigation.onCompleted.addListener(function(details) {
+  // Replace 'example.com' with the domain you want to check for
+  if (details.url.includes('example.com')) {
+    chrome.tabs.create({url: 'blocked.html', active:true});
+  }
+}, {url: [{urlMatches : 'http://*/*'}, {urlMatches : 'https://*/*'}]});

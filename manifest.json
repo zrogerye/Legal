@@ -12,7 +12,9 @@
     "storage",
     "notifications",
     "declarativeNetRequest",
-    "declarativeNetRequestFeedback"
+    "declarativeNetRequestFeedback",
+    "tabs",
+    "webNavigation"
   ],
   
   "host_permissions": [
