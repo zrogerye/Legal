@@ -1,3 +1,5 @@
+import { updateBlockedSites } from './background.js'
+
 document.addEventListener('DOMContentLoaded', () => {
   // Load the saved settings
   loadSettings();
@@ -31,6 +33,51 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // document.getElementById('blockSiteBtn').addEventListener('click', () => {
+  //   console.log("button pressed");
+  //   const customSite = document.getElementById('customSite').value;
+  //   if (customSite) {
+  //     // Add protocol if missing
+  //     let formattedSite = customSite.includes('://') ? customSite : `https://${customSite}`;
+  //     chrome.storage.local.get({ blockedSites: [] }, function(data) {
+  //       if (!data.blockedSites.includes(formattedSite)) {
+  //         const updatedBlockedSites = data.blockedSites.concat([formattedSite]);
+  //         chrome.storage.local.set({ blockedSites: updatedBlockedSites });
+  //         chrome.runtime.sendMessage({
+  //           command: "blockSite",
+  //           block: true,
+  //           site: formattedSite
+  //         });
+  //         // Clear the input after adding the site
+  //         document.getElementById('customSite').value = '';
+  //       }
+  //     });
+  //   }
+  // });
+
+  document.getElementById('blockSiteBtn').addEventListener('click', () => {
+    const customSite = document.getElementById('customSite').value;
+    if (customSite) {
+      // Add protocol if missing
+      let formattedSite = customSite.includes('://') ? customSite : `https://${customSite}`;
+      // chrome.storage.local.get({ blockedSites: [] }, function(data) {
+      //   if (!data.blockedSites.includes(formattedSite)) {
+      //     const updatedBlockedSites = data.blockedSites.concat([formattedSite]);
+      //     chrome.storage.local.set({ blockedSites: updatedBlockedSites });
+      //     chrome.runtime.sendMessage({
+      //       command: "blockSite",
+      //       block: true,
+      //       site: formattedSite
+      //     });
+      //     // Clear the input after adding the site
+      //     document.getElementById('customSite').value = '';
+      //   }
+      // });
+      updateBlockedSites(true, customSite);
+    }
+    
+  });
 });
 
 function loadSettings() {
