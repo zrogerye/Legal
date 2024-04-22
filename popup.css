@@ -1,18 +1,23 @@
 body {
-  width: 277px; /* Adjust width as needed */
-  height: 402px; /* Adjust height as needed */
-  margin: 0;
+  width: 277px; 
+  height: 200px;
   padding: 10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('images/background.png');
+  background-image: url('images/background.jpg');
+  background-size: 250% 250%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
   text-align: center;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  padding: 2rem;
 }
 
 /* Timer display styles */
@@ -114,8 +119,8 @@ main{
   padding-left: 30px;
 }
 
-/*pie chart code??*/
-@property --percentage {
+/* pie chart code?? */
+/* @property --percentage {
   initial-value: 100%;
   inherits: false;
   syntax: "<percentage>";
@@ -128,7 +133,7 @@ main{
   width: 60vmin;
   height: 60vmin;
   animation: timer 10s infinite linear;
-  box-shadow: 0 0 0 1px black; /* Add a thin black outline */
+  box-shadow: 0 0 0 1px black;
 }
 
 @keyframes timer {
@@ -147,4 +152,4 @@ body {
   place-items: center;
   box-sizing: border-box;
   padding: 2rem;
-}
+} */

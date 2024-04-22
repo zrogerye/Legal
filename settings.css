@@ -1,17 +1,127 @@
 body {
-    width: 400px; /* Adjust width as needed */
-    height: 200px; /* Adjust height as needed */
-    margin: 0;
+    width: 277px; 
+    height: 402px;
     padding: 10px;
-}
+    background-image: url('images/background.jpg');
+    background-size: 300% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box; 
+    padding: 2rem;
+} 
 
-.back-btn {
-    position: absolute;
+#back-btn {
     top: 10px;
-    right: 10px;
+    left: 5px;
+    float: left;
+    padding: 7px 5px 5px 15px;
 }
 
-#time-input-container > div {
-    margin-bottom: 10px; /* Adjust as necessary */
+.londrina-solid-regular {
+    font-family: "Londrina Solid", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+}
+
+#settings-header{
+    font-size: 25px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    letter-spacing: 2px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    padding-right: 30px;
+    padding-top: 4px;
+    align-self: center;
+}
+
+.headings{
+    font-size: 25px;
+    margin: 20px 10px 0px 0px;
+    float: left;
+    color: #F46D6D;
+}
+
+.contents {
+    align-items: center;
+    position: absolute;
+    margin: 30px 0px 0px 30px;
+}
+
+.break-timer-color{
+    color: #4DA09B; 
+    font-size: 16px;
+}
+
+.study-timer-color{
+    color: #F46D6D;
+    font-size: 16px;
+}
+
+#break-timer{
+    color: #4DA09B; 
+}
+
+#study{
+    top: 120px;
+    padding-bottom: 10px;
+}
+
+#break{
+    top: 170px;
+}
+
+input{
+    margin: 5px; 
+    color: #F46D6D;
+}
+
+.input-time{
+    display: flex;
+    text-decoration: none;
+    justify-content: space-evenly;
+    width: 100%;
+    order: 2; /* Positioning below the timer display and above input container */
+    font-size: 16px;
+}
+
+.top-bar{
+    list-style: none;
+    background-color: #5E4746;
+    overflow: auto;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 2px;
+    top: 0;
+    position: fixed;
+    overflow-y: hidden;
+    width: 277px;
+    height: 40.7px;
   }
+
+.top-bar li a{
+    text-decoration: none;
+    color: #EBC49F;
+}
+
+#set-timer-btn{
+    margin-left: 120px;
+}
+
+#site-blocker-container{
+    float: left;
+    color: black;
+    font-size: 15px;
+    font-style: light;
+}
+
+.website{
+    float: left;
+}
   
