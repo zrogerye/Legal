@@ -1,4 +1,5 @@
 body {
+<<<<<<< Updated upstream
   width: 277px; 
   height: 200px;
   padding: 10px;
@@ -90,6 +91,28 @@ button {
 .top-bar li a{
   text-decoration: none;
   color: #EBC49F;
+=======
+    width: 277px; 
+    height: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('images/settings_background.png');
+    background-size: 100% 150%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    padding: 2rem;
+  }
+>>>>>>> Stashed changes
   
 }
 
