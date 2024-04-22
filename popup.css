@@ -1,5 +1,4 @@
 body {
-<<<<<<< Updated upstream
   width: 277px; 
   height: 200px;
   padding: 10px;
@@ -8,8 +7,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('images/background.jpg');
-  background-size: 250% 250%;
+  background-image: url('images/extension_background.png');
+  background-size: 100% 150%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   text-align: center;
@@ -91,28 +90,6 @@ button {
 .top-bar li a{
   text-decoration: none;
   color: #EBC49F;
-=======
-    width: 277px; 
-    height: 200px;
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/settings_background.png');
-    background-size: 100% 150%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    text-align: center;
-    height: 100vh;
-    margin: 0;
-    display: grid;
-    place-items: center;
-    box-sizing: border-box;
-    padding: 2rem;
-  }
->>>>>>> Stashed changes
   
 }
 
@@ -141,38 +118,3 @@ button {
 main{
   padding-left: 30px;
 }
-
-/* pie chart code?? */
-/* @property --percentage {
-  initial-value: 100%;
-  inherits: false;
-  syntax: "<percentage>";
-  
-}
-
-.chart {
-  background: conic-gradient(rgba(176, 197, 164, 1) var(--percentage), white 0);
-  border-radius: 50%;
-  width: 60vmin;
-  height: 60vmin;
-  animation: timer 10s infinite linear;
-  box-shadow: 0 0 0 1px black;
-}
-
-@keyframes timer {
-  from {
-    --percentage: 100%;
-  }
-  to {
-    --percentage: 0%;
-  }
-}
-
-body {
-  height: 100vh;
-  margin: 0;
-  display: grid;
-  place-items: center;
-  box-sizing: border-box;
-  padding: 2rem;
-} */
