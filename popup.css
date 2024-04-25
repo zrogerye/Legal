@@ -7,7 +7,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('images/background.png');
+  background-image: url('images/background.jpg');
   background-size: 250% 250%;
   background-repeat: no-repeat;
   background-attachment: fixed;

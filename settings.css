@@ -2,7 +2,7 @@ body {
     width: 277px; 
     height: 402px;
     padding: 10px;
-    background-image: url('images/blocked_background.png');
+    background-image: url('images/background.jpg');
     background-size: 300% 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
