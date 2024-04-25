@@ -5,14 +5,16 @@
   "description": "A simple Pomodoro timer extension with a website blocking feature.",
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "images/hello_extensions.png"
+    "default_icon": "images/chrome_icon.png"
   },
   "permissions": [
     "alarms",
     "storage",
     "notifications",
     "declarativeNetRequest",
-    "declarativeNetRequestFeedback"
+    "declarativeNetRequestFeedback",
+    "tabs",
+    "webNavigation"
   ],
   "host_permissions": [
     "*://*.instagram.com/*",

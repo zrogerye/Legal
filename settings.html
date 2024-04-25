@@ -2,21 +2,46 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="settings.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <button id="back-btn">Back</button>
 
-  <div id="time-input-container">
-    <div>
-      Minutes: <input type="number" id="minutes" min="0" max="59" value="25"><br>
-    </div>
-    <div>
-      Seconds: <input type="number" id="seconds" min="0" max="59" value="0"><br>
-    </div>
-    <button id="set-timer-btn">Set Timer</button>
-  </div>
+  <ul class="top-bar">
+    <li><a href="#popup.html" id="back-btn"><img src="images/home_icon.png" alt="home icon"></a></li>
+    <li><a href="#settings.html" class="londrina-solid-regular" id="settings-header">SETTINGS</li>
+  </ul>
 
-  <div id="site-blocker-container">
+  <div class="contents">
+    <div id="study">
+      <div class="input-time">
+        <p class="headings">STUDY</p>
+        <div class="study-timer-color">
+          Minutes <input type="number" id="minutes" min="0" max="59" value="25"><br>
+        </div>
+        <div class="study-timer-color">
+          Seconds <input type="number" id="seconds" min="0" max="59" value="0"><br>
+        </div>
+      </div>
+      <button id="set-timer-btn">Set Timer</button>
+    </div>
+
+    <div id="break">
+      <div class="input-time">
+        <p class="headings" id="break-timer">BREAK</p>
+        <div class="break-timer-color">
+          Minutes <input type="number" id="minutes" min="0" max="5" value="5"><br>
+        </div>
+        <div class="break-timer-color">
+          Seconds <input type="number" id="seconds" min="0" max="59" value="0"><br>
+        </div>
+      </div>
+      <button id="set-timer-btn">Set Timer</button>
+    </div>
+
+
+  <!-- <div id="site-blocker-container">
     <label for="block-instagram">Block Instagram:</label>
     <input type="checkbox" id="block-instagram" class="site-block-toggle" data-site="instagram.com"><br>
 
@@ -29,11 +54,33 @@
     <label for="block-youtube">Block YouTube:</label>
     <input type="checkbox" id="block-youtube" class="site-block-toggle" data-site="youtube.com"><br>
     
-    <!-- New input for custom site URL -->
+    <input type="text" id="customSite" placeholder="Enter a site to block" />
+    <button id="blockSiteBtn">Block Site</button> 
+
+
+  </div> -->
+
+  <div id="site-blocker-container">
+    <p class="headings">BLOCKED SITES</p>
+    <br>
+    <div class="website">
+      <label for="block-instagram">Instagram:</label>
+      <input type="checkbox" id="block-instagram" class="site-block-toggle" data-site="instagram.com"><br>
+
+      <label for="block-snapchat">Snapchat:</label>
+      <input type="checkbox" id="block-snapchat" class="site-block-toggle" data-site="snapchat.com"><br>
+
+      <label for="block-tiktok">TikTok:</label>
+      <input type="checkbox" id="block-tiktok" class="site-block-toggle" data-site="tiktok.com"><br>
+
+      <label for="block-youtube">YouTube:</label>
+      <input type="checkbox" id="block-youtube" class="site-block-toggle" data-site="youtube.com"><br>
+
+       <!-- New input for custom site URL -->
     <input type="text" id="customSite" placeholder="Enter a site to block" />
     <button id="blockSiteBtn">Block Site</button>
-
-
+    
+    </div>
   </div>
 
 
