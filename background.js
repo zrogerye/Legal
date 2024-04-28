@@ -62,7 +62,7 @@ function startTimer() {
       chrome.runtime.sendMessage({command: "updateDisplay", timeLeft: 0});
       chrome.notifications.create({
         type: "basic",
-        iconUrl: "images/timer48.png",
+        iconUrl: "images/happy_icon.png",
         title: "Time's up!",
         message: "Your timer has finished.",
         priority: 2
@@ -138,3 +138,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 
 export { updateBlockedSites };
+
+//redirection
+chrome.webNavigation.onCompleted.addListener(function(details) {
+  // Replace 'example.com' with the domain you want to check for
+  if (details.url.includes('example.com')) {
+    chrome.tabs.create({url: 'blocked.html', active:true});
+  }
+}, {url: [{urlMatches : 'http://*/*'}, {urlMatches : 'https://*/*'}]});
