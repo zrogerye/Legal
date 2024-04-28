@@ -141,8 +141,10 @@ export { updateBlockedSites };
 
 //redirection
 chrome.webNavigation.onCompleted.addListener(function(details) {
-  // Replace 'example.com' with the domain you want to check for
-  if (details.url.includes('example.com')) {
-    chrome.tabs.create({url: 'blocked.html', active:true});
+  if (details.url.includes('netflix.com')) {
+    chrome.tabs.query({ active: true, currentWindow: true}, function(tabs) {  
+      chrome.tabs.remove(tabs[0].id); //removes blocked website
+  }); 
+    chrome.tabs.create({url: 'blocked.html', active:true}); //open the blocked.html
   }
 }, {url: [{urlMatches : 'http://*/*'}, {urlMatches : 'https://*/*'}]});
