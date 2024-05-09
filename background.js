@@ -16,7 +16,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.command) {
     case "start":
       if (!isRunning) {
-        //chrome.alarms.create("myAlarm", { delayInMinutes: 1 });
         startTimer();
       }
       break;
@@ -69,12 +68,8 @@ function startTimer() {
       }, function(notificationId) {
         // Open and focus a new tabs after the notification.
         chrome.tabs.create({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
-        //removing tab
-        // chrome.tabs.remove({url: 'https://zrogerye.github.io/PomodoroTimerExtensionSite/', active: true});
       });
-
-      // Here we reset timeLeft to the default or custom time
-      updateTimeLeft(); 
+      updateTimeLeft(); // Here we reset timeLeft to the default or custom time
     }
   }, 1000);
 }
@@ -130,7 +125,6 @@ function loadSettings() {
   });
 }
 
-//alive v2
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "myAlarm") {
     console.log("Alarm triggered!");
@@ -139,7 +133,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 export { updateBlockedSites };
 
-//redirection
+//redirection example
 chrome.webNavigation.onCompleted.addListener(function(details) {
   if (details.url.includes('netflix.com')) {
     chrome.tabs.query({ active: true, currentWindow: true}, function(tabs) {  

@@ -22,17 +22,17 @@ body {
 
 /* Timer display styles */
 #timer-display {
-  font-size: 48px; /* Increased font size */
-  margin: 20px 0; /* Add margin for spacing */
+  font-size: 48px; 
+  margin: 20px 0; 
   text-align: center;
-  width: 100%; /* Ensure it spans the full width */
+  width: 100%; 
   order: 1; /* Ensure it's at the top */
   color: #D37676;
 }
 
 /* Styles for the number inputs */
 input[type="number"] {
-  width: 60px; /* Adjust as needed */
+  width: 60px; 
   padding: 5px;
   margin: 0 5px;
   text-align: center;
@@ -90,7 +90,6 @@ button {
 .top-bar li a{
   text-decoration: none;
   color: #EBC49F;
-  
 }
 
 .londrina-solid-regular {
